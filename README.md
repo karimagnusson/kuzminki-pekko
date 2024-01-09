@@ -5,7 +5,7 @@
 # kuzminki-ec-stream
 
 #### About
-This project adds support for streaming with [Pekko](https://pekko.apache.org/) or [Akka](https://akka.io/) to [kuzminki-ec](https://github.com/karimagnusson/kuzminki-ec).
+This project adds support for streaming with [Pekko](https://pekko.apache.org/) and [Akka](https://akka.io/) to [kuzminki-ec](https://github.com/karimagnusson/kuzminki-ec). Take a look at the [kuzminki-play-demo](https://github.com/karimagnusson/kuzminki-play-demo) for an example of usage.
 
 #### Sbt
 ```sbt
