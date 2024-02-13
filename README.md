@@ -9,16 +9,20 @@ This project adds support for [Pekko](https://pekko.apache.org/) and [Akka](http
 
 #### Sbt
 ```sbt
+// available for Scala 2.13 and Scala 3
+
 // Pekko
-libraryDependencies += "io.github.karimagnusson" % "kuzminki-ec-pekko" % "0.9.0"
+libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-pekko" % "0.9.1"
 
 // Akka
-libraryDependencies += "io.github.karimagnusson" % "kuzminki-ec-akka" % "0.9.0"
+libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-akka" % "0.9.1"
 ```
 
 #### Examples
 Query as Source.
 ```scala
+import kuzminki.pekko.stream._
+
 sql
   .select(user)
   .cols2(t => (
@@ -28,6 +32,8 @@ sql
   .all
   .orderBy(_.name.asc)
   .asSource
+  .map(doSmothing)
+  .runWith(mySink)
 
 // By default the source will fetch 100 rows each time.
 // To fetch a different number of rows: .asSourceBatch(1000)
@@ -35,6 +41,8 @@ sql
 
 Query as Sink.
 ```scala
+import kuzminki.akka.stream._
+
 val insertUserStm = sql
   .insert(user)
   .cols2(t => (
