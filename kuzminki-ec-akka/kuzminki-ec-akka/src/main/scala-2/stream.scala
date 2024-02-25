@@ -5,15 +5,14 @@ import akka.{Done, NotUsed}
 import akka.stream.scaladsl.{Source, Sink}
 import kuzminki.api.Kuzminki
 import kuzminki.select.{Pages, Offset}
-import kuzminki.run.{
-  RunUpdate,
-  RunOperationParams
-}
+import kuzminki.insert.StoredInsert
+import kuzminki.delete.StoredDelete
+import kuzminki.update.StoredUpdate
 
 
 package object stream {
 
-  implicit class OperationAsSink[P](query: RunOperationParams[P]) {
+  implicit class InsertAsSink[P](query: StoredInsert[P]) {
 
     def asSink(implicit db: Kuzminki, ec: ExecutionContext): Sink[P, Future[Done]] = {
       Sink.foreachAsync(1) { (p: P) =>
@@ -28,7 +27,22 @@ package object stream {
     }
   }
 
-  implicit class UpdateAsSink[P1, P2](query: RunUpdate[P1, P2]) {
+  implicit class DeleteAsSink[P](query: StoredDelete[P]) {
+
+    def asSink(implicit db: Kuzminki, ec: ExecutionContext): Sink[P, Future[Done]] = {
+      Sink.foreachAsync(1) { (p: P) =>
+        db.exec(query.render(p))
+      }
+    }
+
+    def asBatchSink(implicit db: Kuzminki, ec: ExecutionContext): Sink[Seq[P], Future[Done]] = {
+      Sink.foreachAsync(1) { (chunk: Seq[P]) =>
+        db.execList(chunk.map(p => query.render(p)))
+      }
+    }
+  }
+
+  implicit class UpdateAsSink[P1, P2](query: StoredUpdate[P1, P2]) {
 
     def asSink(implicit db: Kuzminki, ec: ExecutionContext): Sink[Tuple2[P1, P2], Future[Done]] = {
       Sink.foreachAsync(1) { (p: Tuple2[P1, P2]) =>
@@ -45,11 +59,11 @@ package object stream {
 
   implicit class RunAsSource[M, R](query: Offset[M, R]) {
 
-    def asSource(implicit db: Kuzminki, ec: ExecutionContext): Source[R, NotUsed] = {
-      asSourceBatch(100)
+    def stream(implicit db: Kuzminki, ec: ExecutionContext): Source[R, NotUsed] = {
+      stream(100)
     }
 
-    def asSourceBatch(size: Int)(implicit db: Kuzminki, ec: ExecutionContext): Source[R, NotUsed] = {
+    def stream(size: Int)(implicit db: Kuzminki, ec: ExecutionContext): Source[R, NotUsed] = {
       val pages = Pages(query.render, size)
       Source.unfoldAsync(pages) { pages =>
         pages.next.map {

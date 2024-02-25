@@ -13,7 +13,7 @@ inThisBuild(List(
   )
 ))
 
-ThisBuild / version := "0.9.1"
+ThisBuild / version := "0.9.2"
 ThisBuild / versionScheme := Some("early-semver")
 
 scalaVersion := "3.3.1"
@@ -34,7 +34,7 @@ lazy val kuzminkiEcPekko = (project in file("kuzminki-ec-pekko"))
     name := "kuzminki-ec-pekko",
     crossScalaVersions := supportedScalaVersions,
     libraryDependencies ++= Seq(
-      "io.github.karimagnusson" %% "kuzminki-ec" % "0.9.5-RC2",
+      "io.github.karimagnusson" %% "kuzminki-ec" % "0.9.5-RC3",
       "org.apache.pekko" %% "pekko-actor" % "1.0.2",
       "org.apache.pekko" %% "pekko-stream" % "1.0.2",
     ),

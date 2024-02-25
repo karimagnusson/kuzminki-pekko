@@ -5,15 +5,17 @@
 #### About
 This project adds support for [Pekko](https://pekko.apache.org/) and [Akka](https://akka.io/) streaming to [kuzminki-ec](https://github.com/karimagnusson/kuzminki-ec). Take a look at the [kuzminki-play-demo](https://github.com/karimagnusson/kuzminki-play-demo) for an example of usage.
 
+This version, 0.9.2 is for Kuzminki 0.9.5-RC3 and above. For older versions, use 0.9.1
+
 #### Sbt
 ```sbt
 // available for Scala 2.13 and Scala 3
 
 // Pekko
-libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-pekko" % "0.9.1"
+libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-pekko" % "0.9.2"
 
 // Akka
-libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-akka" % "0.9.1"
+libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-akka" % "0.9.2"
 ```
 
 #### Examples
@@ -29,12 +31,12 @@ sql
   ))
   .all
   .orderBy(_.name.asc)
-  .asSource
+  .stream
   .map(doSmothing)
   .runWith(mySink)
 
 // By default the source will fetch 100 rows each time.
-// To fetch a different number of rows: .asSourceBatch(1000)
+// To fetch a different number of rows: .stream(1000)
 ```
 
 Query as Sink.
