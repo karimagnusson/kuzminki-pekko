@@ -1,6 +1,6 @@
 [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/bukotsunikki.svg?style=social&label=Follow%20%40kuzminki_lib)](https://twitter.com/kuzminki_lib)
 
-# kuzminki-ec-stream
+# kuzminki-pekko
 
 #### About
 This project adds support for [Pekko](https://pekko.apache.org/) streaming to [kuzminki-ec](https://github.com/karimagnusson/kuzminki-ec). Take a look at the [kuzminki-play-demo](https://github.com/karimagnusson/kuzminki-play-demo) for an example of usage.
