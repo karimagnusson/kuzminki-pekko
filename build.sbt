@@ -1,7 +1,7 @@
 
 inThisBuild(List(
   organization := "io.github.karimagnusson",
-  homepage := Some(url("https://github.com/karimagnusson/kuzminki-ec-stream")),
+  homepage := Some(url("https://github.com/karimagnusson/kuzminki-pekko")),
   licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
   developers := List(
     Developer(
@@ -13,7 +13,7 @@ inThisBuild(List(
   )
 ))
 
-ThisBuild / version := "0.9.3"
+ThisBuild / version := "0.9.5"
 ThisBuild / versionScheme := Some("early-semver")
 
 scalaVersion := "3.3.1"
@@ -23,20 +23,20 @@ lazy val scala213 = "2.13.12"
 lazy val supportedScalaVersions = List(scala213, scala3)
 
 lazy val root = (project in file("."))
-  .aggregate(kuzminkiEcPekko)
+  .aggregate(kuzminkiPekko)
   .settings(
     crossScalaVersions := Nil,
     publish / skip := true
   )
 
-lazy val kuzminkiEcPekko = (project in file("kuzminki-ec-pekko"))
+lazy val kuzminkiPekko = (project in file("kuzminki-pekko"))
   .settings(
-    name := "kuzminki-ec-pekko",
+    name := "kuzminki-pekko",
     crossScalaVersions := supportedScalaVersions,
     libraryDependencies ++= Seq(
-      "io.github.karimagnusson" %% "kuzminki-ec" % "0.9.5-RC4",
+      "io.github.karimagnusson" %% "kuzminki-ec" % "0.9.5",
       "org.apache.pekko" %% "pekko-actor" % "1.0.2",
-      "org.apache.pekko" %% "pekko-stream" % "1.0.2",
+      "org.apache.pekko" %% "pekko-stream" % "1.0.2"
     ),
     libraryDependencies ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {

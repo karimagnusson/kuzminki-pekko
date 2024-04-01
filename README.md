@@ -3,17 +3,12 @@
 # kuzminki-ec-stream
 
 #### About
-This project adds support for [Pekko](https://pekko.apache.org/) and [Akka](https://akka.io/) streaming to [kuzminki-ec](https://github.com/karimagnusson/kuzminki-ec). Take a look at the [kuzminki-play-demo](https://github.com/karimagnusson/kuzminki-play-demo) for an example of usage.
+This project adds support for [Pekko](https://pekko.apache.org/) and streaming to [kuzminki-ec](https://github.com/karimagnusson/kuzminki-ec). Take a look at the [kuzminki-play-demo](https://github.com/karimagnusson/kuzminki-play-demo) for an example of usage.
 
 #### Sbt
 ```sbt
 // available for Scala 2.13 and Scala 3
-
-// Pekko
-libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-pekko" % "0.9.3"
-
-// Akka
-libraryDependencies += "io.github.karimagnusson" %% "kuzminki-ec-akka" % "0.9.3"
+libraryDependencies += "io.github.karimagnusson" %% "kuzminki-pekko" % "0.9.5"
 ```
 
 #### Examples
