@@ -5,6 +5,8 @@
 #### About
 This project adds support for [Pekko](https://pekko.apache.org/) streaming to [kuzminki-ec](https://github.com/karimagnusson/kuzminki-ec). Take a look at the [kuzminki-play-demo](https://github.com/karimagnusson/kuzminki-play-demo) for an example of usage.
 
+If you are using Akka, you can use version [0.9.3](https://github.com/karimagnusson/kuzminki-pekko/releases/tag/0.9.3)
+
 #### Sbt
 ```sbt
 // available for Scala 2.13 and Scala 3
